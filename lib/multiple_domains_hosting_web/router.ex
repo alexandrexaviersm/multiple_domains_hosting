@@ -14,7 +14,7 @@ defmodule StoreWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", StoreWeb, host: "books." do
+  scope "/", StoreWeb, host: ["books.ngrok.dev"] do
     pipe_through :browser
 
     live "/", BookLive.Index, :index
@@ -25,7 +25,7 @@ defmodule StoreWeb.Router do
     live "/books/:id/show/edit", BookLive.Show, :edit
   end
 
-  scope "/", StoreWeb, host: "albums." do
+  scope "/", StoreWeb, host: ["albums.ngrok.dev"] do
     pipe_through :browser
 
     live "/", AlbumLive.Index, :index
