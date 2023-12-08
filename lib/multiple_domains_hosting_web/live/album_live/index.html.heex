@@ -29,13 +29,13 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="album-modal" show on_cancel={JS.patch(~p"/albums")}>
+<.modal :if={@live_action in [:new, :edit]} id="album-modal" show on_cancel={JS.patch(~p"/")}>
   <.live_component
     module={StoreWeb.AlbumLive.FormComponent}
     id={@album.id || :new}
     title={@page_title}
     action={@live_action}
     album={@album}
-    patch={~p"/albums"}
+    patch={~p"/"}
   />
 </.modal>

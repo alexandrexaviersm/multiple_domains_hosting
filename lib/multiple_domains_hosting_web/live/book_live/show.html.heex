@@ -12,7 +12,7 @@
   <:item title="Name"><%= @book.name %></:item>
 </.list>
 
-<.back navigate={~p"/books"}>Back to books</.back>
+<.back navigate={~p"/"}>Back to books</.back>
 
 <.modal :if={@live_action == :edit} id="book-modal" show on_cancel={JS.patch(~p"/books/#{@book}")}>
   <.live_component

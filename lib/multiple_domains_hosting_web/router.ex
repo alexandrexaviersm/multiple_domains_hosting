@@ -14,24 +14,32 @@ defmodule StoreWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", StoreWeb do
+  scope "/", StoreWeb, host: "books." do
     pipe_through :browser
 
-    get "/", PageController, :home
-
-    live "/books", BookLive.Index, :index
+    live "/", BookLive.Index, :index
     live "/books/new", BookLive.Index, :new
     live "/books/:id/edit", BookLive.Index, :edit
 
     live "/books/:id", BookLive.Show, :show
     live "/books/:id/show/edit", BookLive.Show, :edit
+  end
 
-    live "/albums", AlbumLive.Index, :index
+  scope "/", StoreWeb, host: "albums." do
+    pipe_through :browser
+
+    live "/", AlbumLive.Index, :index
     live "/albums/new", AlbumLive.Index, :new
     live "/albums/:id/edit", AlbumLive.Index, :edit
 
     live "/albums/:id", AlbumLive.Show, :show
     live "/albums/:id/show/edit", AlbumLive.Show, :edit
+  end
+
+  scope "/", StoreWeb do
+    pipe_through :browser
+
+    get "/", PageController, :home
   end
 
   # Other scopes may use custom stacks.

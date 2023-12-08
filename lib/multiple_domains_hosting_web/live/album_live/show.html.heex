@@ -12,7 +12,7 @@
   <:item title="Name"><%= @album.name %></:item>
 </.list>
 
-<.back navigate={~p"/albums"}>Back to albums</.back>
+<.back navigate={~p"/"}>Back to albums</.back>
 
 <.modal :if={@live_action == :edit} id="album-modal" show on_cancel={JS.patch(~p"/albums/#{@album}")}>
   <.live_component
