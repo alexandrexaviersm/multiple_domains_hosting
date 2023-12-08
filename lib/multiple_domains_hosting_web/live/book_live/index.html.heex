@@ -1,0 +1,41 @@
+<.header>
+  Listing Books
+  <:actions>
+    <.link patch={~p"/books/new"}>
+      <.button>New Book</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="books"
+  rows={@streams.books}
+  row_click={fn {_id, book} -> JS.navigate(~p"/books/#{book}") end}
+>
+  <:col :let={{_id, book}} label="Name"><%= book.name %></:col>
+  <:action :let={{_id, book}}>
+    <div class="sr-only">
+      <.link navigate={~p"/books/#{book}"}>Show</.link>
+    </div>
+    <.link patch={~p"/books/#{book}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, book}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: book.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="book-modal" show on_cancel={JS.patch(~p"/books")}>
+  <.live_component
+    module={StoreWeb.BookLive.FormComponent}
+    id={@book.id || :new}
+    title={@page_title}
+    action={@live_action}
+    book={@book}
+    patch={~p"/books"}
+  />
+</.modal>

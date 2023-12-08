@@ -1,0 +1,26 @@
+<.header>
+  Album <%= @album.id %>
+  <:subtitle>This is a album record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/albums/#{@album}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit album</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @album.name %></:item>
+</.list>
+
+<.back navigate={~p"/albums"}>Back to albums</.back>
+
+<.modal :if={@live_action == :edit} id="album-modal" show on_cancel={JS.patch(~p"/albums/#{@album}")}>
+  <.live_component
+    module={StoreWeb.AlbumLive.FormComponent}
+    id={@album.id}
+    title={@page_title}
+    action={@live_action}
+    album={@album}
+    patch={~p"/albums/#{@album}"}
+  />
+</.modal>

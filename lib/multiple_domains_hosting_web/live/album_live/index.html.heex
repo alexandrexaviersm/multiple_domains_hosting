@@ -1,0 +1,41 @@
+<.header>
+  Listing Albums
+  <:actions>
+    <.link patch={~p"/albums/new"}>
+      <.button>New Album</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="albums"
+  rows={@streams.albums}
+  row_click={fn {_id, album} -> JS.navigate(~p"/albums/#{album}") end}
+>
+  <:col :let={{_id, album}} label="Name"><%= album.name %></:col>
+  <:action :let={{_id, album}}>
+    <div class="sr-only">
+      <.link navigate={~p"/albums/#{album}"}>Show</.link>
+    </div>
+    <.link patch={~p"/albums/#{album}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, album}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: album.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="album-modal" show on_cancel={JS.patch(~p"/albums")}>
+  <.live_component
+    module={StoreWeb.AlbumLive.FormComponent}
+    id={@album.id || :new}
+    title={@page_title}
+    action={@live_action}
+    album={@album}
+    patch={~p"/albums"}
+  />
+</.modal>
