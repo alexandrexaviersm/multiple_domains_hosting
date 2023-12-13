@@ -1,5 +1,13 @@
 import Config
 
+# Configure your Beacon repo
+config :beacon, Beacon.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "store",
+  pool_size: 10
+
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
 # when generating URLs.

@@ -17,10 +17,11 @@ defmodule Store.Application do
       # Start Finch
       {Finch, name: Store.Finch},
       # Start the Endpoint (http/https)
-      StoreWeb.Endpoint
+      StoreWeb.Endpoint,
       # Start a worker by calling: Store.Worker.start_link(arg)
       # {Store.Worker, arg}
-    ]
+     {Beacon, sites: [[site: :books, endpoint: StoreWeb.Endpoint, data_source: Store.BeaconDataSource]]}
+]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

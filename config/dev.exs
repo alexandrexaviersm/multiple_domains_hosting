@@ -1,5 +1,15 @@
 import Config
 
+# Configure your Beacon repo
+config :beacon, Beacon.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "store_dev",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # Configure your database
 config :multiple_domains_hosting, Store.Repo,
   username: "postgres",

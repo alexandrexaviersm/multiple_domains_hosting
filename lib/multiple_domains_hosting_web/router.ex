@@ -63,4 +63,11 @@ defmodule StoreWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+  use Beacon.Router
+
+  scope "/" do
+    pipe_through :browser
+    beacon_site "/books", site: :books
+  end
 end

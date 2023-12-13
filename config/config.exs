@@ -9,15 +9,12 @@ import Config
 
 config :multiple_domains_hosting,
   namespace: Store,
-  ecto_repos: [Store.Repo]
+  ecto_repos: [Store.Repo, Beacon.Repo]
 
 # Configures the endpoint
 config :multiple_domains_hosting, StoreWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [
-    formats: [html: StoreWeb.ErrorHTML, json: StoreWeb.ErrorJSON],
-    layout: false
-  ],
+  render_errors: [formats: [html: BeaconWeb.ErrorHTML]],
   pubsub_server: Store.PubSub,
   live_view: [signing_salt: "8V1fengz"]
 
