@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for multiple-domains-hosting on 2023-12-08T13:20:20-03:00
+# fly.toml app configuration file generated for multiple-domains-hosting on 2023-12-08T16:07:44-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "multiple-domains-hosting"
-primary_region = "gru"
+primary_region = "mia"
 kill_signal = "SIGTERM"
 
 [build]
